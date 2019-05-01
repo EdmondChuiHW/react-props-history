@@ -1,4 +1,4 @@
-import makeDispatch from "./dispatch";
+import makeDispatch from './dispatch';
 
 describe('makeDispatch', () => {
   it('sends action to no subscribers without crashing', () => {

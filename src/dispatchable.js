@@ -1,5 +1,5 @@
 import React from 'react';
-import makeDispatch from "./dispatch";
+import makeDispatch from './dispatch';
 
 const defaultSubscriber = (action, ...params) => {
   throw new Error(`Tried calling ${action}(${params.join(', ')}) before component is rendered.`);

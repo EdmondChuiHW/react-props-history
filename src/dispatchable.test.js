@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import makeDispatchable from "./dispatchable";
+import makeDispatchable from './dispatchable';
 import {render} from 'react-testing-library';
 import {act} from 'react-dom/test-utils';
 
