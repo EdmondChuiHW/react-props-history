@@ -4,6 +4,9 @@
 ![David](https://img.shields.io/david/chuihinwai/react-dispatchable.svg)
 ![David](https://img.shields.io/david/dev/chuihinwai/react-dispatchable.svg)
 
+Enhances a React component and allows callbacks to be dispatched
+
+## Install
 `npm i react-dispatchable -D`
 
 ## Example
