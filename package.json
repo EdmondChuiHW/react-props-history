@@ -1,12 +1,16 @@
 {
   "name": "react-dispatchable",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Enhances a React component and allows callbacks to be dispatched",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": ["/lib"],
   "scripts": {
     "test": "jest",
-    "prebuild": "rm -rf ./lib",
-    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "del:tests": "del lib/**/*.test.js ",
+    "prebuild": "rimraf lib",
+    "build": "./node_modules/.bin/babel src --out-dir lib --copy-files",
+    "postbuild": "npm run del:tests",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -30,10 +34,12 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.7.1",
+    "del-cli": "^1.1.0",
     "jest": "^24.7.1",
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
-    "react-testing-library": "^7.0.0"
+    "react-testing-library": "^7.0.0",
+    "rimraf": "^2.6.3"
   },
   "dependencies": {
     "react": "^16.8.6"
