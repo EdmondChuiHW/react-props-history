@@ -1,0 +1,36 @@
+{
+  "name": "dispatchable",
+  "version": "1.0.0",
+  "description": "Enhances a React component and allows callbacks to be dispatched",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuihinwai/react-dispatchable.git"
+  },
+  "keywords": [
+    "react",
+    "react-testing-library",
+    "jest"
+  ],
+  "author": "Edmond Chui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chuihinwai/react-dispatchable/issues"
+  },
+  "homepage": "https://github.com/chuihinwai/react-dispatchable#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
+    "react-testing-library": "^7.0.0"
+  },
+  "dependencies": {
+    "react": "^16.8.6"
+  }
+}
