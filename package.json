@@ -1,10 +1,12 @@
 {
   "name": "react-dispatchable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Enhances a React component and allows callbacks to be dispatched",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "prepublish": "build"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,8 @@
   },
   "homepage": "https://github.com/chuihinwai/react-dispatchable#readme",
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.7.1",
