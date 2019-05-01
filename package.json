@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "./node_modules/.bin/babel src --out-dir lib",
-    "prepublish": "build"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
