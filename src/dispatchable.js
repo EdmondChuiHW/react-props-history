@@ -5,7 +5,9 @@ const defaultSubscriber = (action, ...params) => {
   throw new Error(`Tried calling ${action}(${params.join(', ')}) before component is rendered.`);
 };
 
-const makeDispatchable = Comp => {
+const DummyComp = () => <></>;
+
+const makeDispatchable = (Comp = DummyComp) => {
   const d = makeDispatch();
   d.setSubscriber(defaultSubscriber);
 

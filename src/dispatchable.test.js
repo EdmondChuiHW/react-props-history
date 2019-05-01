@@ -18,7 +18,7 @@ const DumbDumbParent = ({DumbBoi}) => {
 
 describe('makeDispatchable', () => {
   it('fires with no param', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     const onClick = jest.fn();
     render(<Comp onClick={onClick}/>);
 
@@ -27,7 +27,7 @@ describe('makeDispatchable', () => {
   });
 
   it('fires with one param', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     const onClick = jest.fn();
     render(<Comp onClick={onClick}/>);
 
@@ -37,7 +37,7 @@ describe('makeDispatchable', () => {
   });
 
   it('fires with some params', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     const onClick = jest.fn();
     render(<Comp onClick={onClick}/>);
 
@@ -47,7 +47,7 @@ describe('makeDispatchable', () => {
   });
 
   it('fires with some params to original component', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     const {queryByText} = render(<DumbDumbParent DumbBoi={Comp}/>);
     expect(queryByText('Failing')).toBeTruthy();
     expect(queryByText('Success')).toEqual(null);
@@ -67,7 +67,7 @@ describe('makeDispatchable', () => {
   });
 
   it('fires with params only for the last instance', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     const firstClickHandler = jest.fn();
     const secondClickHandler = jest.fn();
     render(<Comp onClick={firstClickHandler}/>);
@@ -80,20 +80,20 @@ describe('makeDispatchable', () => {
   });
 
   it('throws if dispatch is called before rendering', () => {
-    const [dispatch] = makeDispatchable(Dummy);
+    const [dispatch] = makeDispatchable();
     const throwing = () => dispatch('onClick', '1', 2);
     expect(throwing).toThrow(`Tried calling onClick(1, 2) before component is rendered.`);
   });
 
   it('throws if dispatch is called on an undefined prop', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     render(<Comp/>);
     const throwing = () => dispatch('onClick', '1', 2);
     expect(throwing).toThrow(`Tried calling onClick(1, 2), but props['onClick'] (undefined) is not a function`);
   });
 
   it('throws if dispatch is called on a non-function prop', () => {
-    const [dispatch, Comp] = makeDispatchable(Dummy);
+    const [dispatch, Comp] = makeDispatchable();
     render(<Comp onClick="ORDAAAAA"/>);
     const throwing = () => dispatch('onClick', '1', 2);
     expect(throwing).toThrow(`Tried calling onClick(1, 2), but props['onClick'] (ORDAAAAA) is not a function`);
