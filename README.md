@@ -68,18 +68,18 @@ Just call `onItemSelected`. Simple. 🍻
 Takes an optional input component, returns a dispatch function and an enhanced component.  
 * The dispatch function can be called with the prop key of the input component, passing along remaining arguments, i.e.  
 `dispatch('onItemSelected', 1, '2', {three: 4})` is equivalent to calling  
-`onItemSelected(1, '2', {three: 4})` from inside the input component.
+`prop.onItemSelected(1, '2', {three: 4})` from inside the input component.
 * The enhanced component should not be rendered more than once. The dispatch function only sends events to the last rendered enhanced component. [See spec](./src/dispatchable.test.js#L69)
 
 ## Scripts
+### `npm run build`
+Runs babel and copies TypeScript definitions to `/lib`.  
+
 ### `npm test`
-Runs [relevant](https://jestjs.io/docs/en/cli#watch) unit tests. 
+Runs [relevant](https://jestjs.io/docs/en/cli#watch) unit tests.  
 
 ### `npm run test:ci`
-Runs all unit tests and saves the result in JUnit format.
-
-### `npm run build`
-Runs babel and copies TypeScript definitions to `/lib`.
+Runs all unit tests and saves the result in JUnit format.  
 
 ## Continuous Integration (CI)
 All commits are tested ✅  
