@@ -1,5 +1,5 @@
 {
-  "name": "dispatchable",
+  "name": "react-dispatchable",
   "version": "1.0.0",
   "description": "Enhances a React component and allows callbacks to be dispatched",
   "main": "index.js",
