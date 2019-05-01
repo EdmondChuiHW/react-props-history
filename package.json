@@ -4,12 +4,15 @@
   "description": "Enhances a React component and allows callbacks to be dispatched",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": ["/lib"],
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "test": "jest",
+    "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
     "del:tests": "del lib/**/*.test.js ",
     "prebuild": "rimraf lib",
-    "build": "./node_modules/.bin/babel src --out-dir lib --copy-files",
+    "build": "./node_modules/.bin/babel src --out-dir lib --copy-files --ignore='**/*.test.js'",
     "postbuild": "npm run del:tests",
     "prepublish": "npm run build"
   },
@@ -36,6 +39,7 @@
     "babel-jest": "^24.7.1",
     "del-cli": "^1.1.0",
     "jest": "^24.7.1",
+    "jest-junit": "^6.3.0",
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "react-testing-library": "^7.0.0",
