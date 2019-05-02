@@ -10,12 +10,12 @@ Enhances a React component and allows callbacks to be dispatched
 `npm i react-dispatchable -D`
 
 ## Example
-Consider this simplified `PizzaPicker`:
+Consider this `PizzaBuilder`:
 ```
 import React, {useState} from 'react';
 import Dropdown from "…";
 
-const PizzaPicker = props => {
+const PizzaBuilder = props => {
   const [status, setStatus] = useState('Hungry');
   const setCrustType = crust => setStatus(`Selected 🍕 crust: ${crust}`);
 
@@ -27,44 +27,72 @@ const PizzaPicker = props => {
   </>;
 };
 ```
-To test that the correct crust message is shown after an item from `Dropdown` has been selected, you might be tempted to mock away `Dropdown`, or use some selectors to drill down the DOM tree, find the dropdown, simulate a click event, find the row with the target crust, simulate a click event, etc. 😨
-
-We can do better. A well-composed component should be loosely-coupled. Let's make `PizzaPicker` take a `Dropdown` prop instead:
+To test that the correct crust is shown after an item from `Dropdown` has been selected, you might be tempted to mock away `Dropdown`, or use some selectors to drill down the DOM tree, find the dropdown, simulate a click event, find the row with the target crust, simulate a click event, etc. 😨 It may look something like this: 
 ```
-import DefaultDropdown from "…";
+import {render} from 'react-testing-library';
+import {Simulate} from 'react-dom/test-utils';
 
-const PizzaPicker = ({Dropdown = DefaultDropdown}) => {
+describe('SearchBar', () => {
+  it('updates text on Dropdown item selected', () => {
+    const {queryByText, container} = render(<PizzaBuilder/>);
+    
+    const dropdown = container.querySelector('[aria-label="Crust picker"]');
+    Simulate.mouseDown(dropdown);
+    
+    // You probably have something more complicated than :first-of-type
+    const thinCrustItem = dropdown.querySelector('li:first-of-type');
+    Simulate.mouseDown(thinCrustItem);
+
+    expect(queryByText('Selected 🍕 crust: thin')).toBeTruthy();
+  });
+});
+```
+The noise-to-signal ratio is _too damn high_. All you want is to assert `Selected 🍕 crust: thin` exists. But you have to spend 80% of your test doing irrelevant gymnastics to trigger your item-selected handler.  
+If you decided to swap out Dropdown with RadioGroup, your tests will break immediately.
+
+If you find a component hard to unit test, it’s a strong sign that it’s too tightly-coupled.
+
+A well-composed component should be loosely-coupled, without the need to mock or drill down its children. Let's make PizzaBuilder take CrustSelector as a prop:
+```
+import Dropdown from "…";
+
+const PizzaBuilder = ({CrustSelector = Dropdown}) => {
   …
   return <>
     <div>{status}</div>
-    <Dropdown
+    <CrustSelector
       onItemSelected={setCrustType}
     />
   </>;
 };
 ```
-It works exactly the same as before, except we now allow `Dropdown` to be optionally passed in, while maintaining the simple syntax `<PizzaPicker/>` by default.
+It works exactly the same as before, except we now allow `CrustSelector` to be optionally passed in, while maintaining the simple syntax `<PizzaBuilder/>` with `Dropdown` as default.
 
-In our tests, we can now pass in a special `Dropdown` that lets us trigger `onItemSelected` at will:
+If you decided to swap out `Dropdown` with `RadioGroup`, you can do that easily. Anyone could be a `CrustSelector` ~if you believe in yourself~, it just needs to implement `onItemSelected`.
+
+The only link between `PizzaBuilder` and `CrustSelector` is `onItemSelected`.
+
+Loosely-coupled components have minimal knowledge and dependencies on each other.
+
+With [react-dispatchable](https://github.com/chuihinwai/react-dispatchable), we can now pass in a special CrustSelector that lets us trigger onItemSelected in our tests:
 ```
 import makeDispatchable from 'react-dispatchable';
 import {render} from 'react-testing-library';
 import {act} from 'react-dom/test-utils';
 
 describe('SearchBar', () => {
-  it('updates text on ClearButton click', () => {
+  it('updates text on CrustSelector item selected', () => {
     const [dispatch, TestDropdown] = makeDispatchable();  // or pass an actual Dropdown: makeDispatchable(Dropdown)
-    const {queryByText} = render(<PizzaPicker Dropdown={TestDropdown}/>);
-    expect(queryByText('Hungry')).toBeTruthy();
+    const {queryByText} = render(<PizzaBuilder CrustSelector={TestDropdown}/>);
 
     act(() => dispatch('onItemSelected', 'thin'));
-
     expect(queryByText('Selected 🍕 crust: thin')).toBeTruthy();
   });
 });
 ```
-No drilling down 50 levels deep to find the dropdown row or simulating any touch events.  
-Just call `onItemSelected`. Simple. 🍻
+No drilling down 50 levels deep to find the dropdown row or simulating any click events.  
+Just call `onItemSelected`. That’s the beauty of loosely-coupled components.  
+_Simple_. 🍻
 
 ## API
 `makeDispatchable(InputComponent) => [dispatch, EnhancedComponent]`  
