@@ -1,6 +1,6 @@
 {
   "name": "react-dispatchable",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Enhances a React component and allows callbacks to be dispatched",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
