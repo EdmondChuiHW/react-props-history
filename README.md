@@ -85,7 +85,7 @@ describe('SearchBar', () => {
     const [dispatch, TestDropdown] = makeDispatchable();  // or pass an actual Dropdown: makeDispatchable(Dropdown)
     const {queryByText} = render(<PizzaBuilder CrustSelector={TestDropdown}/>);
 
-    act(() => dispatch('onItemSelected', 'thin'));
+    act(() => dispatch.onItemSelected('thin');
     expect(queryByText('Selected 🍕 crust: thin')).toBeTruthy();
   });
 });
@@ -96,9 +96,9 @@ _Simple_. 🍻
 
 ## API
 `makeDispatchable(InputComponent) => [dispatch, EnhancedComponent]`  
-Takes an optional input component, returns a dispatch function and an enhanced component.  
-* The dispatch function can be called with the prop key of the input component, passing along remaining arguments, i.e.  
-`dispatch('onItemSelected', 1, '2', {three: 4})` is equivalent to calling  
+Takes an optional input component, returns a dispatch object and an enhanced component.  
+* The dispatch object will be filled with all functions passed as props after rendering, i.e.  
+`dispatch.onItemSelected(1, '2', {three: 4})` is equivalent to calling  
 `prop.onItemSelected(1, '2', {three: 4})` from inside the input component.
 * The enhanced component should not be rendered more than once. The dispatch function only sends events to the last rendered enhanced component. [See spec](./src/dispatchable.test.js#L69)
 
