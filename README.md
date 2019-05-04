@@ -85,7 +85,7 @@ describe('SearchBar', () => {
     const [dispatch, TestDropdown] = makeDispatchable();  // or pass an actual Dropdown: makeDispatchable(Dropdown)
     const {queryByText} = render(<PizzaBuilder CrustSelector={TestDropdown}/>);
 
-    act(() => dispatch.onItemSelected('thin');
+    act(() => dispatch.onItemSelected('thin'));
     expect(queryByText('Selected 🍕 crust: thin')).toBeTruthy();
   });
 });
