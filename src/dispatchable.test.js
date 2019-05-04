@@ -22,7 +22,7 @@ describe('makeDispatchable', () => {
     const onClick = jest.fn();
     render(<Comp onClick={onClick}/>);
 
-    dispatch('onClick');
+    dispatch.onClick();
     expect(onClick).toBeCalledTimes(1);
   });
 
@@ -31,7 +31,7 @@ describe('makeDispatchable', () => {
     const onClick = jest.fn();
     render(<Comp onClick={onClick}/>);
 
-    dispatch('onClick', 'you');
+    dispatch.onClick('you');
     expect(onClick).toBeCalledTimes(1);
     expect(onClick).toBeCalledWith('you');
   });
@@ -41,7 +41,7 @@ describe('makeDispatchable', () => {
     const onClick = jest.fn();
     render(<Comp onClick={onClick}/>);
 
-    dispatch('onClick', '1', 2, {three: 4});
+    dispatch.onClick('1', 2, {three: 4});
     expect(onClick).toBeCalledTimes(1);
     expect(onClick).toBeCalledWith('1', 2, {three: 4});
   });
@@ -52,7 +52,7 @@ describe('makeDispatchable', () => {
     expect(queryByText('Failing')).toBeTruthy();
     expect(queryByText('Success')).toEqual(null);
 
-    act(() => dispatch('onClick', '1', 2, {three: 4}));
+    act(() => dispatch.onClick('1', 2, {three: 4}));
 
     expect(queryByText('Failing')).toEqual(null);
     expect(queryByText('Success')).toBeTruthy();
@@ -73,7 +73,7 @@ describe('makeDispatchable', () => {
     render(<Comp onClick={firstClickHandler}/>);
     render(<Comp onClick={secondClickHandler}/>);
 
-    dispatch('onClick', '1', 2);
+    dispatch.onClick('1', 2);
     expect(firstClickHandler).toBeCalledTimes(0);
     expect(secondClickHandler).toBeCalledTimes(1);
     expect(secondClickHandler).toBeCalledWith('1', 2);
@@ -81,21 +81,21 @@ describe('makeDispatchable', () => {
 
   it('throws if dispatch is called before rendering', () => {
     const [dispatch] = makeDispatchable();
-    const throwing = () => dispatch('onClick', '1', 2);
-    expect(throwing).toThrow(`Tried calling onClick(1, 2) before component is rendered.`);
+    const throwing = () => dispatch.onClick('1', 2);
+    expect(throwing).toThrow(`dispatch.onClick is not a function`);
   });
 
   it('throws if dispatch is called on an undefined prop', () => {
     const [dispatch, Comp] = makeDispatchable();
     render(<Comp/>);
-    const throwing = () => dispatch('onClick', '1', 2);
-    expect(throwing).toThrow(`Tried calling onClick(1, 2), but props['onClick'] (undefined) is not a function`);
+    const throwing = () => dispatch.onClick('1', 2);
+    expect(throwing).toThrow(`dispatch.onClick is not a function`);
   });
 
   it('throws if dispatch is called on a non-function prop', () => {
     const [dispatch, Comp] = makeDispatchable();
     render(<Comp onClick="ORDAAAAA"/>);
-    const throwing = () => dispatch('onClick', '1', 2);
-    expect(throwing).toThrow(`Tried calling onClick(1, 2), but props['onClick'] (ORDAAAAA) is not a function`);
+    const throwing = () => dispatch.onClick('1', 2);
+    expect(throwing).toThrow(`dispatch.onClick is not a function`);
   });
 });

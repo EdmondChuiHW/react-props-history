@@ -1,27 +1,16 @@
 import React from 'react';
-import makeDispatch from './dispatch';
-
-const defaultSubscriber = (action, ...params) => {
-  throw new Error(`Tried calling ${action}(${params.join(', ')}) before component is rendered.`);
-};
+import copyFunctionsIntoDest from './copy-functions-into-dest';
 
 const DummyComp = () => <></>;
 
 const makeDispatchable = (Comp = DummyComp) => {
-  const d = makeDispatch();
-  d.setSubscriber(defaultSubscriber);
+  const dispatch = {};
 
   const EnhancedComp = props => {
-    d.setSubscriber((action, ...params) => {
-      const callable = props[action];
-      if (!callable || typeof callable !== 'function') {
-        throw new Error(`Tried calling ${action}(${params.join(', ')}), but props['${action}'] (${callable}) is not a function`);
-      }
-      callable(...params);
-    });
+    copyFunctionsIntoDest(props, dispatch);
     return <Comp {...props}/>;
   };
-  return [d.dispatch, EnhancedComp];
+  return [dispatch, EnhancedComp];
 };
 
 export default makeDispatchable;
