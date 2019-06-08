@@ -1,7 +1,7 @@
 {
   "name": "react-props-history",
   "version": "3.0.1",
-  "description": "Enhances a React component and allows callbacks to be dispatched",
+  "description": "Allows props history of a React component to be inspected in tests",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
