@@ -1,5 +1,5 @@
 {
-  "name": "react-dispatchable",
+  "name": "react-props-history",
   "version": "3.0.0",
   "description": "Enhances a React component and allows callbacks to be dispatched",
   "main": "lib/index.js",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chuihinwai/react-dispatchable.git"
+    "url": "git+https://github.com/EdmondChuiHW/react-props-history.git"
   },
   "keywords": [
     "react",
@@ -28,9 +28,9 @@
   "author": "Edmond Chui",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chuihinwai/react-dispatchable/issues"
+    "url": "https://github.com/EdmondChuiHW/react-props-history/issues"
   },
-  "homepage": "https://github.com/chuihinwai/react-dispatchable#readme",
+  "homepage": "https://github.com/EdmondChuiHW/react-props-history#readme",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
