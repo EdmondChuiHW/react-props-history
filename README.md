@@ -74,18 +74,19 @@ The only link between `PizzaBuilder` and `CrustSelector` is `onItemSelected`.
 
 Loosely-coupled components have minimal knowledge and dependencies on each other.
 
-With [react-dispatchable](https://github.com/chuihinwai/react-dispatchable), we can now pass in a special CrustSelector that lets us trigger onItemSelected in our tests:
+With [react-props-history](https://github.com/EdmondChuiHW/react-props-history), we can now pass in a special CrustSelector that lets us trigger onItemSelected in our tests:
 ```
-import makeDispatchable from 'react-dispatchable';
+import withPropsHistory from 'react-props-history';
 import {render} from 'react-testing-library';
 import {act} from 'react-dom/test-utils';
 
 describe('SearchBar', () => {
   it('updates text on CrustSelector item selected', () => {
-    const [dispatch, TestDropdown] = makeDispatchable();  // or pass an actual Dropdown: makeDispatchable(Dropdown)
+    const TestDropdown = withPropsHistory();  // or pass an actual Dropdown: withPropsHistory(Dropdown)
     const {queryByText} = render(<PizzaBuilder CrustSelector={TestDropdown}/>);
 
-    act(() => dispatch.onItemSelected('thin'));
+    expect(TestDropdown.propsHistory.length).toEqual(1);
+    act(() => TestDropdown.propsHistory[0].onItemSelected('thin'));
     expect(queryByText('Selected 🍕 crust: thin')).toBeTruthy();
   });
 });
@@ -95,12 +96,12 @@ Just call `onItemSelected`. That’s the beauty of loosely-coupled components.
 _Simple_. 🍻
 
 ## API
-`makeDispatchable(InputComponent) => [dispatch, EnhancedComponent]`  
-Takes an optional input component, returns a dispatch object and an enhanced component.  
-* The dispatch object will be filled with all functions passed as props after rendering, i.e.  
-`dispatch.onItemSelected(1, '2', {three: 4})` is equivalent to calling  
+`withPropsHistory(ComponentType) => ComponentType & {propsHistory: Props[]}`  
+Takes an optional input component, returns an enhanced component type with a `propsHistory` array property.  
+* The propsHistory array will be filled with the props after each render.
+* You can trigger functions passed in as props, i.e.  
+`propsHistory[0].onItemSelected(1, '2', {three: 4})` is equivalent to calling  
 `prop.onItemSelected(1, '2', {three: 4})` from inside the input component.
-* The enhanced component should not be rendered more than once. The dispatch function only sends events to the last rendered enhanced component. [See spec](./src/dispatchable.test.js#L69)
 
 ## Scripts
 ### `npm run build`

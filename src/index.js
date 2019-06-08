@@ -1,3 +1,3 @@
-import makeDispatchable from "./dispatchable";
+import withPropsHistory from './withPropsHistory';
 
-export default makeDispatchable;
+export default withPropsHistory;
