@@ -1,13 +1,13 @@
-# react-dispatchable
-[![Build Status](https://dev.azure.com/chuihinwai/react-dispatchable/_apis/build/status/chuihinwai.react-dispatchable?branchName=master)](https://dev.azure.com/chuihinwai/react-dispatchable/_build/latest?definitionId=3&branchName=master)
-[![npm version](https://badge.fury.io/js/react-dispatchable.svg)](https://badge.fury.io/js/react-dispatchable)
-![David](https://img.shields.io/david/chuihinwai/react-dispatchable.svg)
-![David](https://img.shields.io/david/dev/chuihinwai/react-dispatchable.svg)
+# react-props-history
+[![Build Status](https://dev.azure.com/EdmondChuiHW/react-props-history/_apis/build/status/EdmondChuiHW.react-props-history?branchName=master)](https://dev.azure.com/EdmondChuiHW/react-props-history/_build/latest?definitionId=3&branchName=master)
+[![npm version](https://badge.fury.io/js/react-props-history.svg)](https://badge.fury.io/js/react-props-history)
+![David](https://img.shields.io/david/EdmondChuiHW/react-props-history.svg)
+![David](https://img.shields.io/david/dev/EdmondChuiHW/react-props-history.svg)
 
-Enhances a React component and allows callbacks to be dispatched
+Allows props history of a React component to be inspected in tests
 
 ## Install
-`npm i react-dispatchable -D`
+`npm i react-props-history -D`
 
 ## Example
 Consider this `PizzaBuilder`:
