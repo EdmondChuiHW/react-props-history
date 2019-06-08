@@ -26,7 +26,7 @@
     "jest"
   ],
   "author": "Edmond Chui",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/EdmondChuiHW/react-props-history/issues"
   },
