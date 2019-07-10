@@ -1,6 +1,6 @@
 import React from 'react';
 
-const withPropsHistory = (Comp = () => <></>) => {
+const withPropsHistory = (Comp = () => <div/>) => {
   const history = [];
   const WithHistory = (props) => {
     history.push(props);
