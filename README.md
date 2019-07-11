@@ -122,4 +122,4 @@ View the Azure Pipeline project: https://dev.azure.com/chuihinwai/react-dispatch
 None, other than `react`
 
 --------
-Alternatively, you can also use `jest.fn()` if you only use Functional Components
+Alternatively, you can also wrap your component type in `jest.fn()` if you only use Functional Components
