@@ -1,6 +1,6 @@
 {
   "name": "react-props-history",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Allows props history of a React component to be inspected in tests",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
