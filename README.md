@@ -120,3 +120,6 @@ View the Azure Pipeline project: https://dev.azure.com/chuihinwai/react-dispatch
 
 ## Dependencies
 None, other than `react`
+
+--------
+Alternatively, you can also use `jest.fn()` if you only use Functional Components
