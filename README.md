@@ -82,11 +82,11 @@ import {act} from 'react-dom/test-utils';
 
 describe('SearchBar', () => {
   it('updates text on CrustSelector item selected', () => {
-    const TestDropdown = withPropsHistory();  // or pass an actual Dropdown: withPropsHistory(Dropdown)
-    const {queryByText} = render(<PizzaBuilder CrustSelector={TestDropdown}/>);
+    const DropdownSpy = withPropsHistory();  // or pass an actual Dropdown: withPropsHistory(Dropdown)
+    const {queryByText} = render(<PizzaBuilder CrustSelector={DropdownSpy}/>);
 
-    expect(TestDropdown.propsHistory.length).toEqual(1);
-    act(() => TestDropdown.propsHistory[0].onItemSelected('thin'));
+    expect(DropdownSpy.propsHistory.length).toEqual(1);
+    act(() => DropdownSpy.propsHistory[0].onItemSelected('thin'));
     expect(queryByText('Selected 🍕 crust: thin')).toBeTruthy();
   });
 });
