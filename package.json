@@ -46,7 +46,7 @@
     "react-testing-library": "^7.0.0",
     "rimraf": "^2.6.3"
   },
-  "dependencies": {
-    "react": "^16.8.6"
+  "peerDependencies": {
+    "react": "^16.0.0"
   }
 }
