@@ -41,6 +41,7 @@
     "del-cli": "^1.1.0",
     "jest": "^24.7.1",
     "jest-junit": "^6.3.0",
+    "react": "^16.9.0",
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "react-testing-library": "^7.0.0",
